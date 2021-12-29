@@ -1,0 +1,40 @@
+plugins {
+    id 'java-library'
+    id 'base'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+group 'com.eu.atit'
+
+version = "0.0.1"
+
+apply plugin: "java"
+apply plugin: 'maven'
+
+sourceCompatibility = '1.15'
+targetCompatibility = '1.15'
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+project.ext.setProperty("release.disableChecks", "true")
+project.ext.setProperty("release.pushTagsOnly", "true")
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation 'org.mockito:mockito-core:4.2.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.2.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+wrapper {
+    gradleVersion = "6.8"
+    distributionType = Wrapper.DistributionType.ALL
+}
