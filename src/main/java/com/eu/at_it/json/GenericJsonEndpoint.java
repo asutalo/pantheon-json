@@ -4,7 +4,7 @@ package com.eu.at_it.json;
 import com.eu.at_it.helper.Pair;
 import com.eu.at_it.json.provider.EndpointFieldsProvider;
 import com.eu.at_it.json.provider.functions.FieldValueSetter;
-import com.eu.at_it.server.endpoint.Endpoint;
+import com.eu.at_it.pantheon.server.endpoint.Endpoint;
 import com.eu.at_it.service.data.DataService;
 
 import java.util.List;

@@ -25,7 +25,7 @@ project.ext.setProperty("release.disableChecks", "true")
 project.ext.setProperty("release.pushTagsOnly", "true")
 
 dependencies {
-    api 'com.github.asutalo:ioc-server:1.0.2'
+    api 'com.github.asutalo:pantheon-ioc-server:1.0.3'
     api 'com.github.asutalo:didactic-octo-barnacle:0.0.4'
 
     implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'

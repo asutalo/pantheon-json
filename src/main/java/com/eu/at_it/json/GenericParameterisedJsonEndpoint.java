@@ -2,10 +2,10 @@ package com.eu.at_it.json;
 
 import com.eu.at_it.helper.Pair;
 import com.eu.at_it.json.provider.EndpointFieldsProvider;
-import com.eu.at_it.server.response.Response;
-import com.eu.at_it.server.response.SimpleResponse;
-import com.eu.at_it.server.response.exception.InternalServerErrorException;
-import com.eu.at_it.server.response.exception.UnprocessableEntityException;
+import com.eu.at_it.pantheon.server.response.Response;
+import com.eu.at_it.pantheon.server.response.SimpleResponse;
+import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
+import com.eu.at_it.pantheon.server.response.exception.UnprocessableEntityException;
 import com.eu.at_it.service.data.DataService;
 import com.sun.net.httpserver.Headers;
 
