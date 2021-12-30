@@ -1,8 +1,9 @@
-# Didactic Octo Barnacle JSON
+# Pantheon JSON
 
-The frontend component of the Didactic Octo Barnacle.
+The frontend component of the Pantheon.
 
-Built on top of the [ioc-server](https://github.com/asutalo/ioc-server) to provide access to generic CRUD endpoints.
+Built on top of the [Pantheon IOC Server](https://github.com/asutalo/pantheon-ioc-server) to provide access to generic
+CRUD endpoints.
 
 #Features
 Generic `parameterised` and `parameterless` endpoints for working with your domain objects.
@@ -81,4 +82,4 @@ or to `http://localhost:8080/cars/1` to interact with the *parameterised* endpoi
 ## Importing
 
 The library is available via jitpack:
-[![](https://jitpack.io/v/asutalo/didactic-octo-barnacle-json.svg)](https://jitpack.io/#asutalo/didactic-octo-barnacle-json)
+[![](https://jitpack.io/v/asutalo/pantheon-json.svg)](https://jitpack.io/#asutalo/pantheon-json)

@@ -10,8 +10,6 @@ repositories {
 
 group 'com.eu.atit'
 
-version = "0.0.1"
-
 apply plugin: "java"
 apply plugin: 'maven'
 
@@ -26,7 +24,7 @@ project.ext.setProperty("release.pushTagsOnly", "true")
 
 dependencies {
     api 'com.github.asutalo:pantheon-ioc-server:1.0.3'
-    api 'com.github.asutalo:didactic-octo-barnacle:0.0.4'
+    api 'com.github.asutalo:pantheon:0.0.5'
 
     implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
 

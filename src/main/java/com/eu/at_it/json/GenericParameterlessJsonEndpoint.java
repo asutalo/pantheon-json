@@ -1,12 +1,12 @@
 package com.eu.at_it.json;
 
-import com.eu.at_it.helper.Pair;
 import com.eu.at_it.json.provider.EndpointFieldsProvider;
+import com.eu.at_it.pantheon.helper.Pair;
 import com.eu.at_it.pantheon.server.response.Response;
 import com.eu.at_it.pantheon.server.response.SimpleResponse;
 import com.eu.at_it.pantheon.server.response.SimpleResponseWithHeaders;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
-import com.eu.at_it.service.data.DataService;
+import com.eu.at_it.pantheon.service.data.DataService;
 import com.sun.net.httpserver.Headers;
 
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package com.eu.at_it.json.provider.functions;
 
-import com.eu.at_it.helper.Pair;
+import com.eu.at_it.pantheon.helper.Pair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
