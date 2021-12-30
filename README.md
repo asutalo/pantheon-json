@@ -81,5 +81,4 @@ or to `http://localhost:8080/cars/1` to interact with the *parameterised* endpoi
 
 ## Importing
 
-The library is available via jitpack:
-[![](https://jitpack.io/v/asutalo/pantheon-json.svg)](https://jitpack.io/#asutalo/pantheon-json)
+The library is available via [![](https://jitpack.io/v/asutalo/pantheon-json.svg)](https://jitpack.io/#asutalo/pantheon-json)
