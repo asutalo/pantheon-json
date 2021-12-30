@@ -1,14 +1,15 @@
-package com.eu.at_it.annotations.data;
-
-import com.eu.at_it.service.data.DataService;
+package com.eu.at_it.json.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * todo
+ *  for future implementation to automatically hash the passwords
+ */
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface Data {
-    Class<? extends DataService> servedBy();
+public @interface Password {
 }
