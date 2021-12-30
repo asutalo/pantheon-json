@@ -1,7 +1,7 @@
-package com.eu.at_it.json.annotations;
+package com.eu.at_it.pantheon.json.annotations;
 
-import com.eu.at_it.json.validation.HeaderValidation;
-import com.eu.at_it.json.validation.ParamValidation;
+import com.eu.at_it.pantheon.json.validation.HeaderValidation;
+import com.eu.at_it.pantheon.json.validation.ParamValidation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

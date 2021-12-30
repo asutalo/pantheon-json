@@ -1,10 +1,10 @@
-package com.eu.at_it.json;
+package com.eu.at_it.pantheon.json;
 
-import com.eu.at_it.json.provider.EndpointFieldsProvider;
-import com.eu.at_it.json.provider.functions.FieldValueSetter;
-import com.eu.at_it.json.provider.functions.JsonString;
-import com.eu.at_it.json.provider.functions.ValueJsonValuePair;
 import com.eu.at_it.pantheon.helper.Pair;
+import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
+import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
+import com.eu.at_it.pantheon.json.provider.functions.JsonString;
+import com.eu.at_it.pantheon.json.provider.functions.ValueJsonValuePair;
 import com.eu.at_it.pantheon.service.data.DataService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,23 +1,23 @@
-package com.eu.at_it.json.provider;
+package com.eu.at_it.pantheon.json.provider;
 
-import com.eu.at_it.json.annotations.Location;
-import com.eu.at_it.json.annotations.Protected;
-import com.eu.at_it.json.provider.functions.FieldValueSetter;
-import com.eu.at_it.json.provider.functions.JsonString;
-import com.eu.at_it.json.provider.functions.ValueJsonValuePair;
+import com.eu.at_it.pantheon.json.annotations.Location;
+import com.eu.at_it.pantheon.json.annotations.Protected;
+import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
+import com.eu.at_it.pantheon.json.provider.functions.JsonString;
+import com.eu.at_it.pantheon.json.provider.functions.ValueJsonValuePair;
 import com.google.inject.TypeLiteral;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import static com.eu.at_it.json.provider.EndpointFieldsProvider.MULTIPLE_LOCATION_MSG;
-import static com.eu.at_it.json.provider.EndpointFieldsProvider.NO_LOCATION_MSG;
+import static com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider.MULTIPLE_LOCATION_MSG;
+import static com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider.NO_LOCATION_MSG;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 class EndpointFieldsProviderTest {
@@ -33,7 +33,7 @@ class EndpointFieldsProviderTest {
 
     @Test
     void init() {
-        EndpointFieldsProvider<TestClass> spy = spy(endpointFieldsProvider);
+        EndpointFieldsProvider<TestClass> spy = Mockito.spy(endpointFieldsProvider);
 
         doNothing().when(spy).populateAccessibleFields(any());
         doNothing().when(spy).populateFieldToStringFunctionsMap();

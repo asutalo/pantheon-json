@@ -1,7 +1,7 @@
-package com.eu.at_it.json;
+package com.eu.at_it.pantheon.json;
 
-import com.eu.at_it.json.provider.EndpointFieldsProvider;
 import com.eu.at_it.pantheon.helper.Pair;
+import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
 import com.eu.at_it.pantheon.server.response.Response;
 import com.eu.at_it.pantheon.server.response.SimpleResponse;
 import com.eu.at_it.pantheon.server.response.SimpleResponseWithHeaders;

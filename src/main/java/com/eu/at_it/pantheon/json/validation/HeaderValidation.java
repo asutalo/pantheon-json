@@ -1,4 +1,4 @@
-package com.eu.at_it.json.validation;
+package com.eu.at_it.pantheon.json.validation;
 
 import com.sun.net.httpserver.Headers;
 

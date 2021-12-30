@@ -1,4 +1,4 @@
-package com.eu.at_it.json.provider.functions;
+package com.eu.at_it.pantheon.json.provider.functions;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

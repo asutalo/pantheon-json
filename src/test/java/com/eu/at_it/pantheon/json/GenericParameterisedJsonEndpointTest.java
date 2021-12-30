@@ -1,8 +1,8 @@
-package com.eu.at_it.json;
+package com.eu.at_it.pantheon.json;
 
-import com.eu.at_it.json.provider.EndpointFieldsProvider;
-import com.eu.at_it.json.provider.functions.FieldValueSetter;
 import com.eu.at_it.pantheon.helper.Pair;
+import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
+import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
 import com.eu.at_it.pantheon.server.response.Response;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
 import com.eu.at_it.pantheon.server.response.exception.UnprocessableEntityException;
@@ -17,8 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Map;
 
-import static com.eu.at_it.json.GenericJsonEndpoint.ACCEPTED;
-import static com.eu.at_it.json.GenericJsonEndpoint.OK;
+import static com.eu.at_it.pantheon.json.GenericJsonEndpoint.ACCEPTED;
+import static com.eu.at_it.pantheon.json.GenericJsonEndpoint.OK;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.doReturn;

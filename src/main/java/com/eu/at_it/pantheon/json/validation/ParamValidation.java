@@ -1,4 +1,4 @@
-package com.eu.at_it.json.validation;
+package com.eu.at_it.pantheon.json.validation;
 
 import java.util.Map;
 import java.util.function.Predicate;
