@@ -26,8 +26,6 @@ dependencies {
     api 'com.github.asutalo:pantheon-ioc-server:1.0.3'
     api 'com.github.asutalo:pantheon:0.0.5'
 
-    implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
-
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     testImplementation 'org.mockito:mockito-core:4.2.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:4.2.0'
