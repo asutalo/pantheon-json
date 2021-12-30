@@ -5,7 +5,7 @@ The frontend component of the Pantheon.
 Built on top of the [Pantheon IOC Server](https://github.com/asutalo/pantheon-ioc-server) to provide access to generic
 CRUD endpoints.
 
-#Features
+# Features
 Generic `parameterised` and `parameterless` endpoints for working with your domain objects.
 
 All responses from the generic endpoints will be formatted as JSON.
@@ -30,10 +30,10 @@ The generic endpoints provide the following verbs:
   * GET
   * POST
 
-#Restrictions
+# Restrictions
 At the moment only simple variables (i.e. Java standard types) are supported.
 
-#Usage
+# Usage
 As the underlying server provider is the `ioc-server`, we need to create an instance of the _Server_ and
 register our endpoints on it. However, in this case we would register the generic JSON endpoints instead 
 of providing an instance of the provided _Endpoint_ class.
@@ -73,12 +73,12 @@ class Sample {
 When the main method is executed navigate to `http://localhost:8080/cars` to interact with the *parameterless* endpoint,
 or to `http://localhost:8080/cars/1` to interact with the *parameterised* endpoint.
 
-#Coming Soon...
+# Coming Soon...
 * Tweaking requests
   * i.e. limit, sort, filtering
 * Nesting
   * Support for custom classes as variables within the domain objects
 
-## Importing
+# Importing
 
 The library is available via [![](https://jitpack.io/v/asutalo/pantheon-json.svg)](https://jitpack.io/#asutalo/pantheon-json)
