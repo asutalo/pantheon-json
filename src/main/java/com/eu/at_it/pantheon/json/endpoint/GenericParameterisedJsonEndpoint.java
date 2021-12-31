@@ -1,12 +1,12 @@
-package com.eu.at_it.pantheon.json;
+package com.eu.at_it.pantheon.json.endpoint;
 
 import com.eu.at_it.pantheon.helper.Pair;
-import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
 import com.eu.at_it.pantheon.server.response.Response;
 import com.eu.at_it.pantheon.server.response.SimpleResponse;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
 import com.eu.at_it.pantheon.server.response.exception.UnprocessableEntityException;
 import com.eu.at_it.pantheon.service.data.DataService;
+import com.google.inject.TypeLiteral;
 import com.sun.net.httpserver.Headers;
 
 import java.util.Map;
@@ -15,8 +15,8 @@ import java.util.Map;
  * Basic generic endpoint to provide GET by param, PUT, and DELETE verbs
  */
 public class GenericParameterisedJsonEndpoint<T, Q> extends GenericJsonEndpoint<T, Q> {
-    public GenericParameterisedJsonEndpoint(String uriDefinition, DataService<T, Q> service, EndpointFieldsProvider<T> endpointFieldsProvider) {
-        super(uriDefinition, service, endpointFieldsProvider);
+    public GenericParameterisedJsonEndpoint(String uriDefinition, DataService<T, Q> service, TypeLiteral<T> typeLiteral) {
+        super(uriDefinition, service, typeLiteral);
     }
 
     /**

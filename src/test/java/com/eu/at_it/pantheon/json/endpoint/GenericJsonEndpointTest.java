@@ -1,11 +1,13 @@
-package com.eu.at_it.pantheon.json;
+package com.eu.at_it.pantheon.json.endpoint;
 
 import com.eu.at_it.pantheon.helper.Pair;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
+import com.eu.at_it.pantheon.json.provider.EndpointFieldsProviderCache;
 import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
 import com.eu.at_it.pantheon.json.provider.functions.JsonString;
 import com.eu.at_it.pantheon.json.provider.functions.ValueJsonValuePair;
 import com.eu.at_it.pantheon.service.data.DataService;
+import com.google.inject.TypeLiteral;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,14 +17,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Map;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GenericJsonEndpointTest {
-    static final int SOME_INT = 1;
-    static final String VAR = "string";
-    static final String OTHER_VAR = "integer";
     private static final String SOME_STRING = "someString";
     private static final String SOME_OTHER_STRING = "someOtherString";
     @Mock
@@ -46,16 +46,21 @@ class GenericJsonEndpointTest {
     @Mock
     private Object mockObject;
 
+    @Mock
+    private TypeLiteral<Object> mockTypeLiteral;
+
+    @Mock
+    private EndpointFieldsProviderCache mockEndpointFieldsProviderCache;
+
     private GenericJsonEndpoint<Object, Object> genericJsonEndpoint;
 
     @BeforeEach
     void setUp() {
-        genericJsonEndpoint = new TestImpl("", mockDataAccessService, mockEndpointFieldsProvider);
-    }
+        EndpointFieldsProviderCache.setInstance(mockEndpointFieldsProviderCache);
+        when(mockEndpointFieldsProviderCache.endpointFieldsProviderFor(any())).thenReturn(mockEndpointFieldsProvider);
+        genericJsonEndpoint = new TestImpl("", mockDataAccessService, mockTypeLiteral);
 
-    @Test
-    void shouldInitialiseEndpointFieldsProvider() {
-        verify(mockEndpointFieldsProvider).init();
+        verify(mockEndpointFieldsProviderCache).endpointFieldsProviderFor(mockTypeLiteral);
     }
 
     @Test
@@ -91,8 +96,8 @@ class GenericJsonEndpointTest {
     }
 
     static class TestImpl extends GenericJsonEndpoint<Object, Object> {
-        public TestImpl(String uriDefinition, DataService<Object, Object> service, EndpointFieldsProvider<Object> endpointFieldsProvider) {
-            super(uriDefinition, service, endpointFieldsProvider);
+        public TestImpl(String uriDefinition, DataService<Object, Object> service, TypeLiteral<Object> typeLiteral) {
+            super(uriDefinition, service, typeLiteral);
         }
     }
 }

@@ -1,11 +1,14 @@
-package com.eu.at_it.pantheon.json;
+package com.eu.at_it.pantheon.json.endpoint;
 
 
 import com.eu.at_it.pantheon.helper.Pair;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
+import com.eu.at_it.pantheon.json.provider.EndpointFieldsProviderCache;
 import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
+import com.eu.at_it.pantheon.json.provider.functions.ValueJsonValuePair;
 import com.eu.at_it.pantheon.server.endpoint.Endpoint;
 import com.eu.at_it.pantheon.service.data.DataService;
+import com.google.inject.TypeLiteral;
 
 import java.util.List;
 import java.util.Map;
@@ -19,16 +22,10 @@ abstract class GenericJsonEndpoint<T, Q> extends Endpoint {
     final DataService<T, Q> service;
     private final EndpointFieldsProvider<T> endpointFieldsProvider;
 
-    /**
-     * TODO refactor so that EndpointFieldsProvider is not provided, instead it should be pulled from a singleton with a map of constructed extractor instances. The singleton constructs them via a Factory taking TypeLiteral<T>
-     */
-    public GenericJsonEndpoint(String uriDefinition, DataService<T, Q> service, EndpointFieldsProvider<T> endpointFieldsProvider) {
+    public GenericJsonEndpoint(String uriDefinition, DataService<T, Q> service, TypeLiteral<T> typeLiteral) {
         super(uriDefinition);
-
         this.service = service;
-        this.endpointFieldsProvider = endpointFieldsProvider;
-
-        endpointFieldsProvider.init();
+        this.endpointFieldsProvider = EndpointFieldsProviderCache.INSTANCE().endpointFieldsProviderFor(typeLiteral);
     }
 
     String toString(T instance) {
@@ -42,7 +39,8 @@ abstract class GenericJsonEndpoint<T, Q> extends Endpoint {
     }
 
     Pair<String, String> getLocation(T instance) {
-        return endpointFieldsProvider.locationGetter().apply(instance);
+        ValueJsonValuePair<T> tValueJsonValuePair = endpointFieldsProvider.locationGetter();
+        return tValueJsonValuePair.apply(instance);
     }
 
     String withBracers(String join) {

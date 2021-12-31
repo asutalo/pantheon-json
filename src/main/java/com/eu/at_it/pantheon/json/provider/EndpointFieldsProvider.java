@@ -5,7 +5,6 @@ import com.eu.at_it.pantheon.json.annotations.Protected;
 import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
 import com.eu.at_it.pantheon.json.provider.functions.JsonString;
 import com.eu.at_it.pantheon.json.provider.functions.ValueJsonValuePair;
-import com.google.inject.Inject;
 import com.google.inject.TypeLiteral;
 
 import java.lang.reflect.Field;
@@ -22,12 +21,11 @@ public class EndpointFieldsProvider<T> {
     private final Class<? super T> tClass;
     private ValueJsonValuePair<T> locationGetter;
 
-    @Inject
-    public EndpointFieldsProvider(TypeLiteral<T> typeLiteral) {
+    EndpointFieldsProvider(TypeLiteral<T> typeLiteral) {
         this.tClass = typeLiteral.getRawType();
     }
 
-    public void init() {
+    void init() {
         populateAccessibleFields(tClass);
 
         populateFieldToStringFunctionsMap();
