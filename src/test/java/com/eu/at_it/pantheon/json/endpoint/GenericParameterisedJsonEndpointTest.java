@@ -61,7 +61,7 @@ class GenericParameterisedJsonEndpointTest {
     void setUp() {
         EndpointFieldsProviderCache.setInstance(mockEndpointFieldsProviderCache);
         when(mockEndpointFieldsProviderCache.endpointFieldsProviderFor(any())).thenReturn(mockEndpointFieldsProvider);
-        genericParameterisedJsonEndpoint = spy(new GenericParameterisedJsonEndpoint<>("", mockDataAccessService, mockTypeLiteral));
+        genericParameterisedJsonEndpoint = spy(new GenericParameterisedJsonEndpoint<>("", mockTypeLiteral));
     }
 
     @Test

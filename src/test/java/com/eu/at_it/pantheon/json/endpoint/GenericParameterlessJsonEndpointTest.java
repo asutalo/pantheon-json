@@ -1,14 +1,19 @@
 package com.eu.at_it.pantheon.json.endpoint;
 
 import com.eu.at_it.pantheon.helper.Pair;
+import com.eu.at_it.pantheon.json.TestClass;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProviderCache;
 import com.eu.at_it.pantheon.server.response.Response;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
+import com.eu.at_it.pantheon.service.Service;
+import com.eu.at_it.pantheon.service.ServiceProvider;
+import com.eu.at_it.pantheon.service.ServiceProviderRegistry;
 import com.eu.at_it.pantheon.service.data.DataService;
 import com.google.inject.TypeLiteral;
 import com.sun.net.httpserver.Headers;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,12 +43,12 @@ class GenericParameterlessJsonEndpointTest {
     private static final String SOME_LOCATION = "someLocation";
 
     @Mock
-    private DataService<Object, Object> mockDataAccessService;
+    private DataService<TestClass, Object> mockDataAccessService;
 
     @Mock
-    private Object mockObject;
+    private TestClass mockObject;
 
-    private GenericParameterlessJsonEndpoint<Object, Object> genericParameterlessJsonEndpoint;
+    private GenericParameterlessJsonEndpoint<TestClass, Object> genericParameterlessJsonEndpoint;
 
     @Mock
     private EndpointFieldsProvider<Object> mockEndpointFieldsProvider;
@@ -51,15 +56,33 @@ class GenericParameterlessJsonEndpointTest {
     @Mock
     private EndpointFieldsProviderCache mockEndpointFieldsProviderCache;
 
-    @Mock
-    private TypeLiteral<Object> mockTypeLiteral;
+    private TypeLiteral<TestClass> mockTypeLiteral = TypeLiteral.get(TestClass.class);
+
+    @BeforeAll
+    static void initSetUp() {
+        DataService mockDataService = mock(DataService.class);
+
+        ServiceProviderRegistry.INSTANCE().register(new ServiceProvider() {
+            @Override
+            public Service provide(TypeLiteral<?> servingType) {
+                return mockDataService;
+            }
+
+            @Override
+            public TypeLiteral<? extends Service> providerFor() {
+                return TypeLiteral.get(DataService.class);
+            }
+        });
+    }
 
     @BeforeEach
     void setUp() {
         EndpointFieldsProviderCache.setInstance(mockEndpointFieldsProviderCache);
         when(mockEndpointFieldsProviderCache.endpointFieldsProviderFor(any())).thenReturn(mockEndpointFieldsProvider);
 
-        genericParameterlessJsonEndpoint = spy(new GenericParameterlessJsonEndpoint<>("", mockDataAccessService, SOME_LOCATION, mockTypeLiteral));
+        GenericParameterlessJsonEndpoint<TestClass, Object> genericParameterlessJsonEndpointBase = new GenericParameterlessJsonEndpoint<>("", SOME_LOCATION, mockTypeLiteral);
+        genericParameterlessJsonEndpointBase.setService(mockDataAccessService);
+        genericParameterlessJsonEndpoint = spy(genericParameterlessJsonEndpointBase);
     }
 
     @Test

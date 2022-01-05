@@ -5,7 +5,6 @@ import com.eu.at_it.pantheon.server.response.Response;
 import com.eu.at_it.pantheon.server.response.SimpleResponse;
 import com.eu.at_it.pantheon.server.response.SimpleResponseWithHeaders;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
-import com.eu.at_it.pantheon.service.data.DataService;
 import com.google.inject.TypeLiteral;
 import com.sun.net.httpserver.Headers;
 
@@ -20,8 +19,8 @@ import java.util.stream.Collectors;
 public class GenericParameterlessJsonEndpoint<T, Q> extends GenericJsonEndpoint<T, Q> {
     private String locationRoot;
 
-    public GenericParameterlessJsonEndpoint(String uriDefinition, DataService<T, Q> service, String locationRoot, TypeLiteral<T> typeLiteral) {
-        super(uriDefinition, service, typeLiteral);
+    public GenericParameterlessJsonEndpoint(String uriDefinition, String locationRoot, TypeLiteral<T> typeLiteral) {
+        super(uriDefinition, typeLiteral);
         setLocationRoot(locationRoot);
     }
 
