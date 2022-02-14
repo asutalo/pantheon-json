@@ -25,6 +25,7 @@ public class EndpointFieldsProviderCache {
         INSTANCE = null;
     }
 
+    //for easier testing
     public static void setInstance(EndpointFieldsProviderCache INSTANCE) {
         EndpointFieldsProviderCache.INSTANCE = INSTANCE;
     }

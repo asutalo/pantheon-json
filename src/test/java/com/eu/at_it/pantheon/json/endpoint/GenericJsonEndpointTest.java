@@ -33,7 +33,6 @@ class GenericJsonEndpointTest {
     private final TypeLiteral<TestClass> testClassTypeLiteral = TypeLiteral.get(TestClass.class);
     private GenericJsonEndpoint<TestClass, Object> genericJsonEndpoint;
 
-
     @Mock
     private EndpointFieldsProvider<Object> mockEndpointFieldsProvider;
 
