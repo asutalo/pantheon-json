@@ -1,12 +1,14 @@
 package com.eu.at_it.pantheon.json.endpoint;
 
 import com.eu.at_it.pantheon.helper.Pair;
+import com.eu.at_it.pantheon.json.TestClass;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProviderCache;
 import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
 import com.eu.at_it.pantheon.server.response.Response;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
 import com.eu.at_it.pantheon.server.response.exception.UnprocessableEntityException;
+import com.eu.at_it.pantheon.service.ServiceProviderRegistry;
 import com.eu.at_it.pantheon.service.data.DataService;
 import com.google.inject.TypeLiteral;
 import com.sun.net.httpserver.Headers;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 
 import static com.eu.at_it.pantheon.json.endpoint.GenericJsonEndpoint.ACCEPTED;
@@ -41,9 +44,6 @@ class GenericParameterisedJsonEndpointTest {
     private DataService<Object, Object> mockDataAccessService;
 
     @Mock
-    private TypeLiteral<Object> mockTypeLiteral;
-
-    @Mock
     private FieldValueSetter<Object> mockFieldValueSetter;
 
     @Mock
@@ -52,22 +52,30 @@ class GenericParameterisedJsonEndpointTest {
     @Mock
     private EndpointFieldsProviderCache mockEndpointFieldsProviderCache;
 
+    private final TestClass testClass = new TestClass();
+    private final TypeLiteral<TestClass> testClassTypeLiteral = TypeLiteral.get(TestClass.class);
+    private GenericParameterisedJsonEndpoint<TestClass, Object> genericParameterisedJsonEndpoint;
     @Mock
-    private Object mockObject;
-
-    private GenericParameterisedJsonEndpoint<Object, Object> genericParameterisedJsonEndpoint;
+    private ServiceProviderRegistry mockServiceProviderRegistry = mock(ServiceProviderRegistry.class);
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws NoSuchFieldException, IllegalAccessException {
+        Field instance = ServiceProviderRegistry.class.getDeclaredField("INSTANCE");
+        instance.setAccessible(true);
+
+        instance.set(ServiceProviderRegistry.INSTANCE(), mockServiceProviderRegistry);
         EndpointFieldsProviderCache.setInstance(mockEndpointFieldsProviderCache);
         when(mockEndpointFieldsProviderCache.endpointFieldsProviderFor(any())).thenReturn(mockEndpointFieldsProvider);
-        genericParameterisedJsonEndpoint = spy(new GenericParameterisedJsonEndpoint<>("", mockTypeLiteral));
+        when(mockServiceProviderRegistry.getService(any(), any())).thenReturn(mockDataAccessService);
+        genericParameterisedJsonEndpoint = spy(new GenericParameterisedJsonEndpoint("", testClassTypeLiteral));
+
+        verify(mockEndpointFieldsProviderCache).endpointFieldsProviderFor(testClassTypeLiteral);
     }
 
     @Test
     void get() throws Exception {
-        doReturn(SOME_STRING).when(genericParameterisedJsonEndpoint).toString(mockObject);
-        when(mockDataAccessService.get(EMPTY_MAP)).thenReturn(mockObject);
+        doReturn(SOME_STRING).when(genericParameterisedJsonEndpoint).toString(any());
+        when(mockDataAccessService.get(EMPTY_MAP)).thenReturn(testClass);
 
         Response response = genericParameterisedJsonEndpoint.get(EMPTY_MAP, SOME_REQUEST_BODY, mock(Headers.class));
 
@@ -79,13 +87,13 @@ class GenericParameterisedJsonEndpointTest {
     void delete() throws Exception {
         Pair<String, String> locationPair = new Pair<>(SOME_STRING, SOME_OTHER_STRING);
 
-        when(mockDataAccessService.get(EMPTY_MAP)).thenReturn(mockObject);
+        when(mockDataAccessService.get(EMPTY_MAP)).thenReturn(testClass);
         doReturn(SOME_STRING).when(genericParameterisedJsonEndpoint).withBracers(SOME_STRING);
-        doReturn(locationPair).when(genericParameterisedJsonEndpoint).getLocation(mockObject);
+        doReturn(locationPair).when(genericParameterisedJsonEndpoint).getLocation(testClass);
 
         Response response = genericParameterisedJsonEndpoint.delete(EMPTY_MAP, SOME_REQUEST_BODY, mock(Headers.class));
 
-        verify(mockDataAccessService).delete(mockObject);
+        verify(mockDataAccessService).delete(testClass);
         Assertions.assertEquals(ACCEPTED, response.getStatusCode());
         Assertions.assertEquals(SOME_STRING, response.getMessage());
     }
@@ -95,17 +103,17 @@ class GenericParameterisedJsonEndpointTest {
         String updatedVal = "new val";
         String otherUpdatedVal = "other new val";
 
-        when(mockDataAccessService.get(EMPTY_MAP)).thenReturn(mockObject);
+        when(mockDataAccessService.get(EMPTY_MAP)).thenReturn(testClass);
         doReturn(Map.of(SOME_STRING, mockFieldValueSetter, SOME_OTHER_STRING, mockFieldValueSetter)).when(genericParameterisedJsonEndpoint).setters();
-        doReturn(SOME_STRING).when(genericParameterisedJsonEndpoint).toString(mockObject);
+        doReturn(SOME_STRING).when(genericParameterisedJsonEndpoint).toString(testClass);
 
         Response response = genericParameterisedJsonEndpoint.put(EMPTY_MAP, Map.of(SOME_STRING, updatedVal, SOME_OTHER_STRING, otherUpdatedVal), mock(Headers.class));
 
         Assertions.assertEquals(ACCEPTED, response.getStatusCode());
         Assertions.assertEquals(SOME_STRING, response.getMessage());
-        verify(mockFieldValueSetter).accept(mockObject, updatedVal);
-        verify(mockFieldValueSetter).accept(mockObject, otherUpdatedVal);
-        verify(mockDataAccessService).update(mockObject);
+        verify(mockFieldValueSetter).accept(testClass, updatedVal);
+        verify(mockFieldValueSetter).accept(testClass, otherUpdatedVal);
+        verify(mockDataAccessService).update(testClass);
     }
 
     @Test
