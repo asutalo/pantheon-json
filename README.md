@@ -40,10 +40,11 @@ endpoints on it. However, in this case we would register the generic JSON endpoi
 the provided _Endpoint_ class.
 
 *NOTE* To instantiate the generic endpoints, you will need to provide an implementation of *DataService*. This
-DataService needs must be *annotated* on your data model class using _@ServedBy_ annotation provided
-by [Pantheon](https://github.com/asutalo/pantheon). Additionally, the DataService also has to be registered in the _
-ServiceProviderRegistry_, also provided by [Pantheon](https://github.com/asutalo/pantheon). An existing implementation
-for interaction with _MySQL_ is available as part of the [pantheon-mysql](https://github.com/asutalo/pantheon-mysql).
+DataService must also be *annotated* on your data model class using _@ServedBy_ annotation provided by
+[Pantheon](https://github.com/asutalo/pantheon). Additionally, the DataService also has to be registered in the
+_ServiceProviderRegistry_, also provided by [Pantheon](https://github.com/asutalo/pantheon). An existing implementation
+for interaction with _MySQL_ is available as part of the [pantheon-mysql](https://github.com/asutalo/pantheon-mysql) and
+is used in the example below.
 
 ````
 class Sample {
@@ -51,11 +52,13 @@ class Sample {
     private static final String SPECIFIC_CAR_URI_PATH = CARS_URI_PATH + "/(id=\\d+)";
     
     public static void main(String[] args) throws IOException {
-        DataClient mySqlClient = new DataClient...
+        //MySqlClient also coming from pantheon-mysql
+        DataClient mySqlClient = new MySqlClient...
+        //the provider is for MySQLService.class which is annotated on the data model below
         TypeLiteral<Car> carTypeLiteral = TypeLiteral.get(Car.class);
-        MySQLService<Car> mySQLService = new MySQLService(mySqlClient, carTypeLiteral)
+        MySQLServiceProvider mySQLServiceProvider = new MySQLServiceProvider(mySqlClient());
         
-        ServiceProviderRegistry.INSTANCE().register(mySQLService);
+        ServiceProviderRegistry.INSTANCE().register(mySQLServiceProvider);
         
         Server server = new Server(8080, 150, 50, 10, TimeUnit.SECONDS, true);
     

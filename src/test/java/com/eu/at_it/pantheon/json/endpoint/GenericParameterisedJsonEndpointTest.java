@@ -19,7 +19,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.lang.reflect.Field;
 import java.util.Map;
 
 import static com.eu.at_it.pantheon.json.endpoint.GenericJsonEndpoint.ACCEPTED;
@@ -59,11 +58,8 @@ class GenericParameterisedJsonEndpointTest {
     private ServiceProviderRegistry mockServiceProviderRegistry = mock(ServiceProviderRegistry.class);
 
     @BeforeEach
-    void setUp() throws NoSuchFieldException, IllegalAccessException {
-        Field instance = ServiceProviderRegistry.class.getDeclaredField("INSTANCE");
-        instance.setAccessible(true);
-
-        instance.set(ServiceProviderRegistry.INSTANCE(), mockServiceProviderRegistry);
+    void setUp() {
+        ServiceProviderRegistry.setInstance(mockServiceProviderRegistry);
         EndpointFieldsProviderCache.setInstance(mockEndpointFieldsProviderCache);
         when(mockEndpointFieldsProviderCache.endpointFieldsProviderFor(any())).thenReturn(mockEndpointFieldsProvider);
         when(mockServiceProviderRegistry.getService(any(), any())).thenReturn(mockDataAccessService);

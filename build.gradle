@@ -24,11 +24,11 @@ project.ext.setProperty("release.pushTagsOnly", "true")
 
 dependencies {
     api 'com.github.asutalo:pantheon-ioc-server:1.0.3'
-    api 'com.github.asutalo:pantheon:0.0.8'
+    api 'com.github.asutalo:pantheon:0.0.10'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-    testImplementation 'org.mockito:mockito-core:4.2.0'
-    testImplementation 'org.mockito:mockito-junit-jupiter:4.2.0'
+    testImplementation 'org.mockito:mockito-core:4.3.1'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.3.1'
 }
 
 test {
