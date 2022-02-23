@@ -44,7 +44,7 @@ public class GenericParameterisedJsonEndpoint<T, Q> extends GenericJsonEndpoint<
 
             Pair<String, String> locationPair = getLocation(toDelete);
 
-            return new SimpleResponse(ACCEPTED, String.valueOf(withBracers(locationPair.left())));
+            return new SimpleResponse(ACCEPTED, String.valueOf(withBracers(locationPair.right())));
         } catch (Exception e) {
             throw new UnprocessableEntityException(); //todo proper exception response code
         }

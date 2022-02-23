@@ -81,7 +81,7 @@ class GenericParameterisedJsonEndpointTest {
 
     @Test
     void delete() throws Exception {
-        Pair<String, String> locationPair = new Pair<>(SOME_STRING, SOME_OTHER_STRING);
+        Pair<String, String> locationPair = new Pair<>(SOME_OTHER_STRING, SOME_STRING);
 
         when(mockDataAccessService.get(EMPTY_MAP)).thenReturn(testClass);
         doReturn(SOME_STRING).when(genericParameterisedJsonEndpoint).withBracers(SOME_STRING);
