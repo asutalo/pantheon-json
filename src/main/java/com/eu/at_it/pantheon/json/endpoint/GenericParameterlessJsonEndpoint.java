@@ -56,7 +56,7 @@ public class GenericParameterlessJsonEndpoint<T, Q> extends GenericJsonEndpoint<
 
             new HashMap<>();
 
-            return new SimpleResponseWithHeaders(CREATED, String.valueOf(withBracers(locationPair.left())), Map.of(LOCATION, List.of(locationRoot + locationPair.right())));
+            return new SimpleResponseWithHeaders(CREATED, String.valueOf(withBracers(locationPair.right())), Map.of(LOCATION, List.of(locationRoot + locationPair.left())));
 
         } catch (Exception e) {
             throw new InternalServerErrorException(); //todo proper exception response code

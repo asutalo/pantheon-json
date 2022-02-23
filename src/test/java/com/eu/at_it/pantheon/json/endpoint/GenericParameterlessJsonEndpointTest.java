@@ -56,7 +56,7 @@ class GenericParameterlessJsonEndpointTest {
     @Mock
     private EndpointFieldsProviderCache mockEndpointFieldsProviderCache;
 
-    private TypeLiteral<TestClass> mockTypeLiteral = TypeLiteral.get(TestClass.class);
+    private final TypeLiteral<TestClass> mockTypeLiteral = TypeLiteral.get(TestClass.class);
 
     @BeforeAll
     static void initSetUp() {
@@ -100,7 +100,7 @@ class GenericParameterlessJsonEndpointTest {
     void post() throws Exception {
         String someLocation = "location";
         String expectedLocation = SOME_LOCATION + "/" + someLocation;
-        Pair<String, String> locationPair = new Pair<>(SOME_STRING, someLocation);
+        Pair<String, String> locationPair = new Pair<>(someLocation, SOME_STRING);
 
         when(mockDataAccessService.instanceOfT(SOME_REQUEST_BODY)).thenReturn(mockObject);
         when(mockDataAccessService.save(mockObject)).thenReturn(mockObject);
