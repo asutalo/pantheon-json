@@ -1,7 +1,7 @@
 package com.eu.at_it.pantheon.json.endpoint;
 
 import com.eu.at_it.pantheon.helper.Pair;
-import com.eu.at_it.pantheon.server.response.Response;
+import com.eu.at_it.pantheon.server.endpoints.Response;
 import com.eu.at_it.pantheon.server.response.SimpleResponse;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
 import com.eu.at_it.pantheon.server.response.exception.UnprocessableEntityException;

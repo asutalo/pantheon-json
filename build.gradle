@@ -23,8 +23,7 @@ project.ext.setProperty("release.disableChecks", "true")
 project.ext.setProperty("release.pushTagsOnly", "true")
 
 dependencies {
-    api 'com.github.asutalo:pantheon-ioc-server:1.0.3'
-    api 'com.github.asutalo:pantheon:0.0.11'
+    api 'com.github.asutalo:pantheon-ioc-server:1.0.4'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     testImplementation 'org.mockito:mockito-core:4.3.1'

@@ -5,7 +5,7 @@ import com.eu.at_it.pantheon.json.TestClass;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProvider;
 import com.eu.at_it.pantheon.json.provider.EndpointFieldsProviderCache;
 import com.eu.at_it.pantheon.json.provider.functions.FieldValueSetter;
-import com.eu.at_it.pantheon.server.response.Response;
+import com.eu.at_it.pantheon.server.endpoints.Response;
 import com.eu.at_it.pantheon.server.response.exception.InternalServerErrorException;
 import com.eu.at_it.pantheon.server.response.exception.UnprocessableEntityException;
 import com.eu.at_it.pantheon.service.ServiceProviderRegistry;
