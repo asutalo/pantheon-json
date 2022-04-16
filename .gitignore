@@ -47,3 +47,6 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+
+gradlew
+gradlew.bat
